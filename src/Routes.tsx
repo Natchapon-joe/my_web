@@ -1,13 +1,24 @@
-import { Routes as ReactRoutes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes as ReactRoutes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Home } from "./Pages";
 
 export default function Routes() {
   return (
-    <div className="app">
-      <ReactRoutes></ReactRoutes>
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <ReactRoutes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Navigate to={"/"} replace />} />
+        </ReactRoutes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
-const layout = () => {
-  return <div></div>;
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return <div className="w-full h-full bg-[#3a71ca]">{children}</div>;
 };
